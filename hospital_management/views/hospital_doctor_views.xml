@@ -1,0 +1,26 @@
+<odoo>
+ <menuitem id="hospital_menu_root" name="Hospital"/>
+
+    <menuitem id="hospital_menu_doctor" name="Doctor" parent="hospital_menu_root"/>
+            <menuitem id="doctor_menu" name="Doctor" parent="hospital_menu_doctor" action="hospital_doctor_action"/>
+
+
+    <record id="view_doctor_form_id" model="ir.ui.view">
+        <field name="name">view_doctor_form</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree/field[@name='work_email']" position="after">
+                <field name="tags" widget="many2many_tags"/>
+
+
+            </xpath>
+
+        </field>
+
+    </record>
+
+
+
+
+</odoo>

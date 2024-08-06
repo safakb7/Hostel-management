@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<templates xml:space="preserve">
+    <t t-name="owl_demo.my_client_action">
+        <div class="container">
+            <div class="align-items-center" style="text-align:center;">
+                <MyInputField />
+            </div>
+        </div>
+    </t>
+</templates>

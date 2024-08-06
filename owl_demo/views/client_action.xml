@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.client" id="my_client_action">
+        <field name="name">OWL Workshop</field>
+        <field name="tag">owl_demo.MyClientAction</field>
+    </record>
+    <menuitem id="maintenance_request_menu_root"
+              name="Maintenance Requests" action="my_client_action"/>
+    <menuitem id="maintenance_conf_root_menu"
+              name="OWL Workshop"
+              action="my_client_action"
+              parent="maintenance_request_menu_root"
+              sequence="10"/>
+</odoo>

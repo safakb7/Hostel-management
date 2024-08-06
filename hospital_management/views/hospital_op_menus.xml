@@ -1,0 +1,61 @@
+<odoo>
+     <menuitem id="hospital_menu_root" name="Hospital"/>
+
+    <menuitem id="hospital_menu_op" name="Hospital OP" parent="hospital_menu_root"/>
+            <menuitem id="hospital_menu" name="Hospital OP" parent="hospital_menu_op" action="hospital_model_action"/>
+
+    <record id="op_view" model="ir.ui.view">
+        <field name="name">op_view</field>
+        <field name="model">hospital.op</field>
+        <field name="arch" type="xml">
+            <tree string="list">
+                <field name="sequence"/>
+                <field name="date"/>
+                <field name="patient_id"/>
+                <field name="age"/>
+                <field name="blood_group"/>
+                <field name="doctor_id"/>
+                <field name="token_number"/>
+                <field name="fees"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="op_form_view" model="ir.ui.view">
+      <field name="name">op_form_view</field>
+        <field name="model">hospital.op</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="stage" widget="statusbar" options="{'clickable':'1'}"/>
+                </header>
+                <sheet>
+                    <group>
+
+                            <group>
+                                <field name="sequence"/>
+                            <field name="date"/>
+                            <field name="patient_id"/>
+                            <field name="age"/>
+                        </group>
+                        <group>
+                            <field name="blood_group"/>
+                            <field name="doctor_id"/>
+                            <field name="token_number"/>
+                            <field name="fees" invisible="'stage', '!=', 'new'"/>
+                            <field name="responsible_id"/>
+                        </group>
+
+                    </group>
+                </sheet>
+            </form>
+
+
+        </field>
+
+    </record>
+
+</odoo>
+
+

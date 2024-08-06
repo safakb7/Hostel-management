@@ -1,0 +1,22 @@
+<odoo>
+
+    <menuitem id="menu_specialization_tag" name="tag">
+
+    </menuitem>
+
+    <record id="view_specialization_tree" model="ir.ui.view">
+        <field name="name">view.specialisation.tree</field>
+        <field name="model">specialization</field>
+        <field name="arch" type="xml">
+            <tree string="list">
+                <field name="name"/>
+
+
+            </tree>
+
+        </field>
+
+    </record>
+
+
+</odoo>

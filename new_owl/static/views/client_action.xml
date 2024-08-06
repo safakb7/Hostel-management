@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.actions.client" id="my_client_action">
+        <field name="name">OWL Workshop</field>
+        <field name="tag">new_owl.Counter</field>
+    </record>
+    <menuitem id="demo_request_menu_root"
+              name=" Demo Owl" action="new_client_action"/>
+    <menuitem id="demo_conf_root_menu"
+              name="Workshop"
+              action="new_client_action"
+              parent="demo_request_menu_root"
+              sequence="10"/>
+</odoo>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="hostel_student_action" model="ir.actions.act_window">
+        <field name="name">Student</field>
+        <field name="res_model">hostel.student</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="student_view" model="ir.ui.view">
+        <field name="name">student_view</field>
+        <field name="model">hostel.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_id"/>
+                <field name="name"/>
+                <field name="partner_id"/>
+                <field name="room_id"/>
+                <field name="email"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="student_form_view" model="ir.ui.view">
+        <field name="name">student_form_view</field>
+        <field name="model">hostel.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_allocate_room" string="Allocate Room"
+                            type="object" class="oe_highlight"/>
+                    <button name="action_vacate_room" string="Vacate"
+                            type="object" class="oe_highlight"/>
+                    <field name="state" widget="statusbar"
+                           options="{'clickable':'1'}"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button class="oe_stat_button" name="get_invoice"
+                                type="object" icon="fa-list">
+                            <field name="invoice_count" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="name"/>
+                            <field name="partner_id"/>
+                            <field name="user_id"/>
+                            <field name="date_of_birth"/>
+                            <field name="age"/>
+                            <field name="room_id"/>
+                            <field name="monthly_amount"/>
+
+                        </group>
+                        <group>
+                            <field name="image" widget='image'
+                                   class="oe_avatar"/>
+                            <field name="email"/>
+                            <field name="receive_mail"/>
+                            <field name="company_id"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Contact Address">
+                            <group>
+                                <field name="street"/>
+                            </group>
+                            <group>
+                                <field name="phone"/>
+                                <field name="mobile"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="model_view_search" model="ir.ui.view">
+        <field name="name">room_number</field>
+        <field name="model">hostel.student</field>
+        <field name="arch" type="xml">
+            <search>
+                <group string="Group By">
+                    <filter string="Room" name="room_id"
+                            context="{'group_by': 'room_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+    <menuitem id="hostel_menu_root" name="Hostel"/>
+    <menuitem id="hostel_menu_student" name="Student"
+              parent="hostel_menu_root" action="hostel_student_action"
+              groups="hostel_management.group_warden,hostel_management.group_student"/>
+</odoo>

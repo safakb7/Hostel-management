@@ -1,0 +1,20 @@
+
+<odoo>
+    <record id="hospital_model_action" model="ir.actions.act_window">
+    <field name="name">Hospital OP</field>
+    <field name="res_model">hospital.op</field>
+    <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+</odoo>
+
+
+<!--  # @api.onchange-->
+<!--    # def warning_msg(self):-->
+<!--    #     if self.charge <= 0:-->
+<!--    #         return {'warning': {'title': "Warning!",-->
+<!--    #                             'message': "Charge should be greater than zero"-->
+<!--    #                             },-->
+<!--    #                 }-->

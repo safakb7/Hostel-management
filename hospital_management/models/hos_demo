@@ -1,0 +1,81 @@
+from odoo import fields, models
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    monthly_discount_limit = fields.Float(string="Monthly Discount Limit")
+
+    def set_values(self):
+    super(ResConfigSettings, self).set_values()
+    self.env['ir.config_parameter'].sudo().set_param('sale.monthly_discount_limit', self.monthly_discount_limit)
+
+
+    @api.model
+    def get_values(self):
+    res = super(ResConfigSettings, self).get_values()
+    res.update(
+        monthly_discount_limit=float(self.env['ir.config_parameter'].sudo().get_param('sale.monthly_discount_limit', default=0.0))
+    return res
+
+
+
+from odoo import api, fields, models
+class ResConfigSettings(models.TransientModel):
+_inherit = 'res.config.settings'
+monthly_discount_limit = fields.Float(string="Monthly Discount Limit")
+def set_values(self):
+ super(ResConfigSettings, self).set_values()
+ self.env['ir.config_parameter'].sudo().set_param('sale.monthly_discount_limit', self.monthly_discount_limit)
+ @api.model
+ def get_values(self):
+ res = super(ResConfigSettings, self).get_values()
+  res.update( monthly_discount_limit=float(self.env['ir.config_parameter'].sudo().get_param('sale.monthly_discount_limit', default=0.0))
+  return res
+
+from odoo import api, fields, models
+class SaleOrderLine(models.Model):
+ _inherit = 'sale.order.line'
+amount_discount = fields.Float(compute='_compute_amount_discount', string='Discount Amount', store=True)
+@api.depends('price_unit', 'discount', 'product_uom_qty', 'tax_id')
+ def _compute_amount_discount(self):
+  for line in self:
+  line.amount_discount = (line.price_unit * (line.discount / 100.0)) * line.product_uom_qty
+
+class SaleOrder(models.Model):
+_inherit = 'sale.order'
+ amount_discount = fields.Float(compute='_compute_amount_discount', string='Total Discount Amount', store=True)
+ @api.depends('order_line.amount_discount')
+ def _compute_amount_discount(self):
+  for order in self:
+   order.amount_discount = sum(line.amount_discount for line in order.order_line)
+
+from odoo import api, fields, models
+from odoo.exceptions import UserError
+class SaleOrder(models.Model):
+_inherit = 'sale.order'
+ @api.model
+  def create(self, vals):
+   self._check_monthly_discount_limit(vals)
+    return super(SaleOrder, self).create(vals)
+ def write(self, vals):
+  self._check_monthly_discount_limit(vals)
+  return super(SaleOrder, self).write(vals)
+ def _check_monthly_discount_limit(self, vals):
+ discount_limit = float(self.env['ir.config_parameter'].sudo().get_param('sale.monthly_discount_limit', default=0.0))
+ if discount_limit == 0.0:
+ return
+ # Calculate new discount total from the vals
+ new_discount_total = 0.0
+ if 'order_line' in vals:
+  for line in vals['order_line']:
+   if isinstance(line, dict):
+   new_discount_total += line.get('discount', 0.0) * line.get('price_unit', 0.0) * line.get('product_uom_qty', 0.0) / 100.0
+    elif isinstance(line, (tuple, list)) and len(line) > 2 and isinstance(line[2], dict):
+    new_discount_total += line[2].get('discount', 0.0) * line[2].get('price_unit', 0.0) * line[2].get('product_uom_qty', 0.0) / 100.0
+# Calculate the total discount applied this month
+current_month_start = fields.Date.today().replace(day=1)
+domain = [('state', '!=', 'cancel'), ('date_order', '>=', current_month_start)]
+ sale_orders = self.env['sale.order'].search(domain)
+ current_discount_total = sum(order.amount_discount for order in sale_orders)
+if current_discount_total + new_discount_total > discount_limit:
+raise UserError('The monthly discount limit has been exceeded.')

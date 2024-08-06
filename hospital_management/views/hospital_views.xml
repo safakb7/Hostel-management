@@ -1,0 +1,30 @@
+<odoo>
+     <menuitem id="hospital_menu_root" name="Hospital"/>
+
+    <menuitem id="hospital_menu_patient" name="Patient" parent="hospital_menu_root"/>
+            <menuitem id="patient_menu" name="Patient" parent="hospital_menu_patient" action="hospital_patient_action"/>
+
+    <record id="patient_view" model="ir.ui.view">
+        <field name="name">view_partner_form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="age"/>
+
+                <field name="blood_group"/>
+                <field name="gender"/>
+                <field name="date_of_birth"/>
+                <field name="sequence"/>
+            </xpath>
+
+        </field>
+
+    </record>
+    
+
+
+
+</odoo>
+
+

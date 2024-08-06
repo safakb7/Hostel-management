@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="facilities_view" model="ir.ui.view">
+        <field name="name">facilities_view</field>
+        <field name="model">hostel.facility</field>
+        <field name="arch" type="xml">
+            <tree string="list">
+                <field name="name"/>
+                <field name="charge"/>
+            </tree>
+        </field>
+    </record>
+    <record id="facilities_form_view" model="ir.ui.view">
+        <field name="name">facilities_form_view</field>
+        <field name="model">hostel.facility</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="charge"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="hostel_facilities_action" model="ir.actions.act_window">
+        <field name="name">Facilities</field>
+        <field name="res_model">hostel.facility</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="hostel_menu_root" name="Hostel"/>
+    <menuitem id="hostel_menu_facilities" name="Facilities"
+              parent="hostel_menu_root" action="hostel_facilities_action"
+              groups="hostel_management.group_warden"/>
+</odoo>

@@ -1,0 +1,31 @@
+<odoo>
+    <menuitem id="test_model_menu_action" action="test_model_action"/>
+
+    <menuitem id="test_menu_root" name="Estate">
+        <menuitem id="test_first_level_menu" name="properties">
+            <menuitem id="test_model_menu_action" action="test_model_action"/>
+        </menuitem>
+    </menuitem>
+
+
+<record id="estate_view_tree" model="ir.ui.view">
+    <field name="name">estate.list</field>
+    <field name="model">estate</field>
+    <field name="arch" type="xml">
+       <tree string="list">
+           <field name="name"/>
+           <field name="postcode"/>
+           <field name="bedrooms"/>
+           <field name="living_area"/>
+           <field name="expected_price"/>
+           <field name="selling_price"/>
+           <field name="available_from"/>
+
+       </tree>
+
+
+
+    </field>
+ </record>
+
+</odoo>

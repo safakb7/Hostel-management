@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="leave_request_action" model="ir.actions.act_window">
+        <field name="name">Leave Request</field>
+        <field name="res_model">leave.request</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="leave_request_view" model="ir.ui.view">
+        <field name="name">request_view</field>
+        <field name="model">leave.request</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="student_id"/>
+                <field name="leave_date"/>
+                <field name="arrival_date"/>
+                <field name="status"/>
+            </tree>
+        </field>
+    </record>
+    <record id="request_form_view" model="ir.ui.view">
+        <field name="name">leave_form_view</field>
+        <field name="model">leave.request</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_approve" string="Approve"
+                            type="object" class="oe_highlight"/>
+                    <field name="status" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="student_id"/>
+                            <field name="room_id"/>
+                            <field name="leave_date"/>
+                            <field name="arrival_date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+     <record id="model_search" model="ir.ui.view">
+        <field name="name">leave_request</field>
+        <field name="model">leave.request</field>
+        <field name="arch" type="xml">
+            <search>
+                <group string="Group By">
+                    <filter string="Leave date" name="leave_date"
+                            context="{'group_by': 'leave_date'}"/>
+                     <filter string="Approved leave" name="leave_date"
+                        domain="[('status', '=', 'approved')]"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <menuitem id="hostel_menu_root" name="Hostel"/>
+    <menuitem id="leave_request_menu" name="Leave Request"
+              parent="hostel_menu_root" action="leave_request_action"
+                groups="hostel_management.group_warden,hostel_management.group_student"/>
+</odoo>

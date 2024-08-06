@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<data noupdate="1">
+    <record model="hostel.facility" id="hostel_ac">
+        <field name="name">AC</field>
+        <field name="charge">200</field>
+    </record>
+    <record model="hostel.facility" id="hostel_tv">
+        <field name="name">TV</field>
+        <field name="charge">100</field>
+    </record>
+    <record model="hostel.facility" id="hostel_wifi">
+        <field name="name">WIFI</field>
+        <field name="charge">150</field>
+    </record>
+</data>
