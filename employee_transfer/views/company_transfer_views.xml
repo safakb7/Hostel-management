@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="company_transfer_view" model="ir.ui.view">
+        <field name="name">transfer_view</field>
+        <field name="model">company.transfer</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="date"/>
+                <field name="current_company"/>
+                <field name="transfer_company_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+    <record id="company_transfer_form_view" model="ir.ui.view">
+        <field name="name">transfer_form_view</field>
+        <field name="model">company.transfer</field>
+        <field name="arch" type="xml">
+            <form>
+                 <header>
+                    <button name="action_transfer_request"
+                            string="Transfer Request" type="object"
+                            class="btn-primary"/>
+                 <field name="state" widget="statusbar"/>
+              </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="current_company"/>
+                        </group>
+                        <group>
+                            <field name="date"/>
+                            <field name="transfer_company_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="company_transfer_action" model="ir.actions.act_window">
+        <field name="name">Company Transfer</field>
+        <field name="res_model">company.transfer</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="transfer_menu_root" name="Employee Transfer"/>
+    <menuitem id="company_transfer_menu" name="Transfer"
+              parent="transfer_menu_root" action="company_transfer_action"/>
+</odoo>

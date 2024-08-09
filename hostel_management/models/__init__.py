@@ -5,6 +5,4 @@ from . import hostel_facility
 from . import leave_request
 from . import student_invoice
 from . import cleaning_service
-
-
-
+from . import hostel_report

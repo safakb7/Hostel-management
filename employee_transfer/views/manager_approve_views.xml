@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="manager_approve_view" model="ir.ui.view">
+        <field name="name">manager_view</field>
+        <field name="model">manager.approve</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="employee_id"/>
+                <field name="company_id"/>
+
+            </tree>
+        </field>
+    </record>
+    <record id="manager_approve_form_view" model="ir.ui.view">
+        <field name="name">manager_form_view</field>
+        <field name="model">manager.approve</field>
+        <field name="arch" type="xml">
+            <form>
+                 <header>
+                    <button name="action_approve"
+                            string="Approve" type="object"
+                            class="btn-primary"/>
+                 </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="company_id"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="manager_approve_action" model="ir.actions.act_window">
+        <field name="name">Manager Approve</field>
+        <field name="res_model">manager.approve</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem id="transfer_menu_root" name="Employee Transfer"/>
+    <menuitem id="manager_approve_menu" name="Request"
+              parent="transfer_menu_root" action="manager_approve_action"/>
+</odoo>

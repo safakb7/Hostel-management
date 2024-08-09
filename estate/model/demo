@@ -1,0 +1,46 @@
+model attributes
+_name
+_description
+_inherit
+_inherits
+_rec_name
+_sql_constrains
+
+
+field attributes in odoo
+required
+readonly
+compute
+default
+ondelete
+selection
+selection_add
+copy
+store
+
+orm methods
+search([])
+search_count([])
+browse
+ref
+create
+write
+unlink
+search_read()
+
+decorators
+api.onchange
+api.depends
+api.autovaccum
+api.constrains
+api.model
+api.modelcreatemulti
+api.ondelete
+api.returns
+
+validation error
+user error - user trying to update a record
+access error - violating access rights of user
+missing error - when a record is deleted and user try to write on that
+warning -
+access denied = invalid login details

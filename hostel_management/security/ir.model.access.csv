@@ -26,3 +26,8 @@ access_hostel_room_warden_user,access.hostel.room.warden.user,model_hostel_room,
 access_hostel_facility_warden_user,access.hostel.facility.warden.user,model_hostel_facility,group_warden,1,1,1,1
 access_leave_request_warden_user,access.leave.request.warden_user,model_leave_request,group_warden,1,1,1,0
 access_cleaning_service_warden_user,access.cleaning.service.warden_user,model_cleaning_service,group_warden,0,0,1,0
+
+access_hostel_report_user,access.hostel.report.user,model_hostel_report,,1,1,1,1
+access_student_wizard_user,access.student.wizard.user,model_student_wizard,,1,1,1,1
+
+

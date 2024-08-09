@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <record id="student_view_form" model="ir.ui.view">
+       <field name="name">student.view.form</field>
+       <field name="model">student.wizard</field>
+       <field name="priority" eval="8"/>
+       <field name="arch" type="xml">
+           <form string="student report">
+               <sheet>
+               <group>
+                   <field name="student_id"/>
+                   <field name="room"/>
+               </group>
+               </sheet>
+               <footer>
+            <button name="action_pdf" string="pdf" type="object" class="btn-primary"/>
+                   <button name="cancel" string="Cancel" special="cancel"/>
+               </footer>
+
+           </form>
+       </field>
+   </record>
+    <record id="student_wizard_action" model="ir.actions.act_window">
+        <field name="name">Students Report</field>
+        <field name="res_model">student.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>

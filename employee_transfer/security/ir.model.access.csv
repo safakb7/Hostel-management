@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_company_transfer_user,access.company.transfer.user,model_company_transfer,,1,1,1,1
+
+access_manager_approve_user,access.manager.approve.user,model_manager_approve,,1,1,1,1

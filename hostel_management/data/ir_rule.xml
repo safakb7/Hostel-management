@@ -34,10 +34,7 @@
     <field name="domain_force">[('company_id', 'in', company_ids)]</field>
         </record>
 
-
-
-
-     <record id="demo_record_student_rule" model="ir.rule">
+        <record id="demo_record_student_rule" model="ir.rule">
     <field name="name">student can only see their own records</field>
     <field name="model_id" ref="model_hostel_student"/>
     <field name="domain_force">[('user_id', '=', user.id)]</field>
@@ -48,8 +45,7 @@
     <field name="name">student can only see their room records</field>
     <field name="model_id" ref="model_hostel_room"/>
              <field name="domain_force">[('student_ids.user_id', '=', user.id)]</field>
-
-    <field name="groups" eval="[(4, ref('hostel_management.group_student'))]"/>
+             <field name="groups" eval="[(4, ref('hostel_management.group_student'))]"/>
     </record>
 
     <record id="demo_record_staff_rule" model="ir.rule">
@@ -58,7 +54,5 @@
     <field name="domain_force">[('staff_id', '=', user.id)]</field>
     <field name="groups" eval="[(4, ref('hostel_management.group_staff'))]"/>
     </record>
-
-
     </data>
 </odoo>
