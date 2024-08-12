@@ -35,7 +35,7 @@ class HostelRoom(models.Model):
     total_rent = fields.Float('Total rent', compute='_compute_total_rent',
                               readonly=True)
     pending_amount = fields.Float('Pending Amount',
-                                  compute='_compute_pending_amount')
+                                  compute='_compute_pending_amount', store=True)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -58,7 +58,8 @@ class HostelRoom(models.Model):
                 'partner_id': student.partner_id.id,
                 'student_id': student.id,
                 'invoice_line_ids': [(0, 0, {
-                    'product_id': self.env.ref('hostel_management.product_rent').id,
+                    'product_id': self.env.ref(
+                        'hostel_management.rent_product').id,
                     'price_unit': self.total_rent
                 })]
             })
@@ -78,7 +79,7 @@ class HostelRoom(models.Model):
                     'student_id': student.id,
                     'invoice_line_ids': [(0, 0, {
                         'product_id': self.env.ref
-                        ('hostel_management.product_rent').id,
+                        ('hostel_management.rent_product').id,
                         'price_unit': self.total_rent
                     })]
                 })

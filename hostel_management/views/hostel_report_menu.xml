@@ -1,14 +1,14 @@
 <odoo>
-    <record id="hostel_report_action" model="ir.actions.act_window">
-        <field name="name">Report</field>
-        <field name="res_model">hostel.report</field>
-        <field name="view_mode">form</field>
-    </record>
-     <menuitem id="hostel_menu_root" name="Hostel"/>
+
     <menuitem id="hostel_report_menu" name="Report"
-              parent="hostel_menu_root" action="hostel_report_action"
+              parent="hostel_menu_root"
               groups="hostel_management.group_warden"/>
-    <menuitem id="hostel_student_report_menu"  sequence="10" name="Student report"
+
+    <menuitem id="hostel_student_report_menu" sequence="10" name="Student"
               parent="hostel_report_menu" action="student_wizard_action"
-              />
+    />
+    <menuitem id="leave_request_report_menu"  name="Leave request"
+              parent="hostel_report_menu" action="leave_request_wizard_action"
+    />
+
 </odoo>

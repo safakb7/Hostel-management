@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_student">
+    <template id="report_leave_request">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
                 <div class="page">
                     <div class="oe_structure"/>
-                    <h2>Student Report</h2>
+                    <h2>Leave Request Report</h2>
                     <br/>
                     <table class="table table-sm o_main_table table-bordered mt-4">
                         <thead style="display: table-row-group">
                             <tr>
-                                <th>Sl No</th>
-                                <th>Name</th>
+                                <th >Sl No</th>
+                                <th>Student</th>
                                 <th>Room</th>
-                                <th>Pending Amount</th>
-                                <th>Invoice Status</th>
+                                <th>Start Date</th>
+                                <th>Arrival Date</th>
+                                <th>Duration</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -24,21 +25,20 @@
                                         <span t-out="rec_index +1"/>
                                     </td>
                                     <td>
-                                        <span t-field="rec.name"/>
+                                        <span t-field="rec.student_id"/>
                                     </td>
                                     <td>
-                                        <span t-field="rec.room_id"/>
+                                        <span t-field="rec.student_id.room_id"/>
                                     </td>
                                     <td>
-                                        <span t-field="rec.room_id.pending_amount"/>
+                                        <span t-field="rec.leave_date"/>
                                     </td>
                                     <td>
-                                        <span t-field="rec.state"/>
+                                        <span t-field="rec.arrival_date"/>
                                     </td>
-<!--                                    <td>-->
-<!--                                        <t t-set="total_value" t-value="rec.room_id.pending_amount"/>-->
-<!--                                        <t t-esc="total_value"/>-->
-<!--                                    </td>-->
+                                     <td>
+                                        <span t-field="rec.duration"/>
+                                    </td>
                                 </tr>
                             </t>
                         </tbody>

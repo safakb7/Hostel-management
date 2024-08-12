@@ -29,5 +29,7 @@ access_cleaning_service_warden_user,access.cleaning.service.warden_user,model_cl
 
 access_hostel_report_user,access.hostel.report.user,model_hostel_report,,1,1,1,1
 access_student_wizard_user,access.student.wizard.user,model_student_wizard,,1,1,1,1
+access_leave_request_wizard_user,access.leave.request.wizard.user,model_leave_request_wizard,,1,1,1,1
+
 
 

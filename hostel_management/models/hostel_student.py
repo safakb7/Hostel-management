@@ -36,7 +36,8 @@ class HostelStudent(models.Model):
     active = fields.Boolean(string='Active', default=True)
     monthly_amount = fields.Float("Monthly amount")
     state = fields.Selection([('pending', 'Pending'), ('done', 'Done')]
-                             , default='pending', compute='_compute_state')
+                             , default='pending', compute='_compute_state',
+                             store=True)
     user_id = fields.Many2one('res.users')
 
     def action_allocate_room(self):
@@ -124,9 +125,10 @@ class HostelStudent(models.Model):
     @api.depends('invoice_ids')
     def _compute_state(self):
         for student in self:
-            invoice = (self.env['account.move'].search([
-                ('payment_state', '=', 'not_paid'),
-                ('student_id', '=', self.id)]))
+            invoice = self.invoice_ids
+            # invoice = (self.env['account.move'].search([
+            #     ('payment_state', '=', 'not_paid'),
+            #     ('student_id', '=', self.id)]))
             if invoice:
                 student.state = 'pending'
             else:

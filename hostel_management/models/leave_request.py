@@ -1,5 +1,6 @@
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
+from datetime import datetime
 
 
 class LeaveRequest(models.Model):
@@ -18,6 +19,7 @@ class LeaveRequest(models.Model):
     company_id = fields.Many2one('res.company', string="Company",
                                  default=lambda self:
                                  self.env.user.company_id.id)
+    duration = fields.Char('Duration')
 
     def action_approve(self):
         for record in self:
@@ -37,3 +39,11 @@ class LeaveRequest(models.Model):
         if self.arrival_date <= self.leave_date:
             raise ValidationError(
                 "Arrival date cannot be before leave date")
+
+    @api.onchange('leave_date', 'arrival_date', 'duration')
+    def calculate_date(self):
+        if self.leave_date and self.arrival_date:
+            d1 = datetime.strptime(str(self.leave_date), '%Y-%m-%d')
+            d2 = datetime.strptime(str(self.arrival_date), '%Y-%m-%d')
+            d3 = d2 - d1
+            self.duration = str(d3.days)

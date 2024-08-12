@@ -1,31 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-   <record id="leave_view_form" model="ir.ui.view">
-       <field name="name">leave.view.form</field>
-       <field name="model">leave.request.wizard</field>
-       <field name="priority" eval="8"/>
-       <field name="arch" type="xml">
-           <form string="leave request report">
-               <sheet>
-               <group>
-                   <field name="student_id"/>
-                   <field name="room"/>
-               </group>
-                   <group>
-                   <field name="start_date"/>
-                   <field name="arrival_date"/>
-               </group>
-               </sheet>
-               <footer>
-                   <button name="cancel" string="Cancel" special="cancel"/>
-               </footer>
+    <record id="leave_view_form" model="ir.ui.view">
+        <field name="name">leave.view.form</field>
+        <field name="model">leave.request.wizard</field>
+        <field name="priority" eval="8"/>
+        <field name="arch" type="xml">
+            <form string="leave request report">
+                <sheet>
+                    <group>
+                        <field name="student_ids" widget="many2many_tags"/>
+                        <field name="room_ids" widget="many2many_tags"/>
+                    </group>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="arrival_date"/>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_pdf" string="pdf" type="object"
+                            class="btn-primary"/>
+                    <button name="cancel" string="Cancel" special="cancel"/>
+                </footer>
 
-           </form>
-       </field>
-   </record>
-    <record id="student_wizard_action" model="ir.actions.act_window">
-        <field name="name">Students Report</field>
-        <field name="res_model">student.wizard</field>
+            </form>
+        </field>
+    </record>
+    <record id="leave_request_wizard_action" model="ir.actions.act_window">
+        <field name="name">Leave Request</field>
+        <field name="res_model">leave.request.wizard</field>
         <field name="view_mode">form</field>
         <field name="target">new</field>
     </record>

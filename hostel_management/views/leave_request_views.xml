@@ -13,6 +13,7 @@
                 <field name="student_id"/>
                 <field name="leave_date"/>
                 <field name="arrival_date"/>
+                <field name="duration"/>
                 <field name="status"/>
             </tree>
         </field>
@@ -34,6 +35,7 @@
                             <field name="room_id"/>
                             <field name="leave_date"/>
                             <field name="arrival_date"/>
+                            <field name="duration"/>
                         </group>
                     </group>
                 </sheet>
@@ -62,5 +64,5 @@
     <menuitem id="hostel_menu_root" name="Hostel"/>
     <menuitem id="leave_request_menu" name="Leave Request"
               parent="hostel_menu_root" action="leave_request_action"
-                groups="hostel_management.group_warden,hostel_management.group_student"/>
+              groups="hostel_management.group_warden,hostel_management.group_student"/>
 </odoo>

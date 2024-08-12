@@ -27,7 +27,6 @@
     'views/leave_request_views.xml',
     'views/student_invoice_views.xml',
     'views/cleaning_service_views.xml',
-    'views/hostel_report_menu.xml',
 
     'data/room_sequence.xml',
     'data/student_sequence.xml',
@@ -38,9 +37,16 @@
     'data/user_automation.xml',
     'data/ir_rule.xml',
 
-    'wizard/student_wizard_views.xml',
     'report/student_template.xml',
     'report/student_report.xml',
+    'report/leave_request_template.xml',
+
+    'report/leave_request_report.xml',
+
+    'views/hostel_report_menu.xml',
+    'wizard/student_wizard_views.xml',
+
+    'wizard/leave_request_wizard_views.xml',
 
 ],
 }
