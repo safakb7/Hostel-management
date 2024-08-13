@@ -18,5 +18,4 @@ class StudentReport(models.AbstractModel):
             'doc_model': 'hostel.student',
             'docs': docs,
             'data': data,
-
         }

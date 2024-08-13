@@ -1,4 +1,5 @@
 from odoo import models, fields
+from odoo.exceptions import ValidationError
 
 
 class LeaveRequestWizard(models.TransientModel):
@@ -39,6 +40,9 @@ class LeaveRequestWizard(models.TransientModel):
         result = self.env.cr.dictfetchall()
         print(result)
         data = {'date': self.read()[0], 'report': result}
+        if not result:
+            raise ValidationError("No data available")
+
         return self.env.ref(
             'hostel_management.action_report_leave_request').report_action(
             None, data=data)

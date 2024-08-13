@@ -3,34 +3,16 @@
     <template id="report_student">
         <t t-call="web.html_container">
             <t t-call="web.external_layout">
-
                 <div class="page">
                     <div class="oe_structure"/>
                     <h2>Student Report</h2>
 
-                        <t t-if="len(docs) == 1">
-                            <h4 style="text-align: left;">
-                               Student:<span t-field="docs.name"/><br/>
-                               Room: <span t-field="docs.room_id"/>
-                            </h4>
-                    </t>
-
-                        <t t-set="var" t-value="docs.room_id.ids"/>
-
-                        <t t-if="len(var) == 1 and len(docs) > 1">
-                    <h4 style="text-align: left;">
-                               Room: <span t-field="docs.room_id"/>
-                            </h4>
-                        </t>
-
-
-                    <table class="table table-sm o_main_table
-                            table-bordered mt-4">
+                    <table class="table table-sm o_main_table table-bordered mt-4">
                         <thead style="display: table-row-group">
                             <tr>
                                 <th>Sl No</th>
-                                <th t-if="len(docs) != 1">Name</th>
-                                <th t-if="len(docs) != 1 and len(var) > 1">Room</th>
+                                <th>Name</th>
+                                <th>Room</th>
                                 <th>Pending Amount</th>
                                 <th>Invoice Status</th>
                             </tr>
@@ -41,11 +23,10 @@
                                     <td>
                                         <span t-out="rec_index +1"/>
                                     </td>
-                                    <td t-if="len(docs) != 1">
+                                    <td>
                                         <span t-field="rec.name"/>
-
                                     </td>
-                                    <td t-if="len(docs) != 1 and len(var) > 1">
+                                    <td>
                                         <span t-field="rec.room_id"/>
                                     </td>
                                     <td>
