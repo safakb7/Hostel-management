@@ -15,6 +15,8 @@
                 <footer>
                     <button name="action_pdf" string="pdf" type="object"
                             class="btn-primary"/>
+                    <button name="print_student_xlsx_report" string="xlsx"
+                            class="btn-primary" type="object"/>
                     <button name="cancel" string="Cancel" special="cancel"/>
                 </footer>
 

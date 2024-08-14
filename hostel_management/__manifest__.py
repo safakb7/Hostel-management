@@ -47,6 +47,9 @@
     'wizard/student_wizard_views.xml',
 
     'wizard/leave_request_wizard_views.xml',
-
 ],
-}
+'assets': {
+    'web.assets_backend': [
+        'hostel_management/static/src/js/action_manager.js',
+        ],
+}}

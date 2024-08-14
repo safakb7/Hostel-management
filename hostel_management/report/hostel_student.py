@@ -19,3 +19,4 @@ class StudentReport(models.AbstractModel):
             'docs': docs,
             'data': data,
         }
+
