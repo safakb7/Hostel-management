@@ -41,3 +41,11 @@ class Estate(models.Model):
 #                       x.date_order.month == self.date_order.month
 #
 #          )
+
+
+ # @api.onchange('product_id')
+#
+# def _onchange_product(self):
+#     if self.order_id.partner_id.is_only_ordered and self.product_id:
+#         if self.product_id.invoice_policy != 'order':
+#             raise ValidationError("select only ordered qty product")

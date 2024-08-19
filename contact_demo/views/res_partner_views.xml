@@ -6,11 +6,17 @@
             <field name="model">res.partner</field>
             <field name="inherit_id" ref="base.view_partner_form"/>
             <field name="arch" type="xml">
-            <field name="category_id" position="after">
-                <field name="is_only_ordered"/>
+                <field name="category_id" position="after">
+                    <field name="is_only_ordered"/>
                 </field>
+<!--                <xpath expr="//tree/field[@name='product_id']"-->
+<!--                       position="replace">-->
+<!--                    <field name="product_ids" optional="hide"/>-->
+<!--                    <field name="product_id"-->
+<!--                           domain="([('id','in',product_ids)])"/>-->
+<!--                </xpath>-->
 
-                </field>
+            </field>
         </record>
     </data>
 </odoo>

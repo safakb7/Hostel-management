@@ -1,0 +1,16 @@
+<odoo>
+<template id="tmp_student_form_success" name="Student Form Successfully Registered">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <div class="container">
+                    <div class="col-md-12">
+                        <div class="alert alert-success">
+                            Successfully registered
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
+

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <record id="student_register_menu" model="website.menu">
+        <field name="name">Student Registration</field>
+        <field name="url">/studentform</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence" type="int">90</field>
+    </record>
+</odoo>
+

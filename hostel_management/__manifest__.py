@@ -16,6 +16,7 @@
         'sale',
         'account',
         'base_automation',
+            'website',
         ],
 'data':[
     'security/user_group.xml',
@@ -47,6 +48,11 @@
     'wizard/student_wizard_views.xml',
 
     'wizard/leave_request_wizard_views.xml',
+    'views/student_register_views.xml',
+
+    'views/student_register_template.xml',
+    'views/student_message_template.xml',
+
 ],
 'assets': {
     'web.assets_backend': [

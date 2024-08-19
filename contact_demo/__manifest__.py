@@ -11,6 +11,7 @@
     'depends': [
         'base',
         'product',
+        'sale'
 ],
 'data': [
         'views/res_partner_views.xml',

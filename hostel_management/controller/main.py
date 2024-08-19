@@ -28,7 +28,7 @@ class XLSXReportController(http.Controller):
                     headers=[
                         ('Content-Type', 'application/vnd.ms-excel'),
                         ('Content-Disposition',
-                         content_disposition('Sale Excel Report' + '.xlsx'))
+                         content_disposition('Student Excel Report' + '.xlsx'))
                     ]
                 )
                 report_obj.get_xlsx_report(options, response)
