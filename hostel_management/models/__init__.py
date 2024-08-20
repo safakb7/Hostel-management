@@ -6,4 +6,3 @@ from . import leave_request
 from . import student_invoice
 from . import cleaning_service
 from . import hostel_report
-from . import student_register

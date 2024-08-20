@@ -1,0 +1,41 @@
+<odoo>
+    <template id="available_rooms" name="Available Rooms">
+        <t t-call="portal.portal_layout">
+            <h2>Available rooms</h2>
+
+            <table class="table table-sm o_main_table">
+                <thead style="display: table-row-group">
+                    <tr>
+                        <th>Room</th>
+                        <th>Room type</th>
+                        <th>Rent</th>
+                        <th>Number of beds</th>
+                        <th>State</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <t t-foreach="rooms" t-as="room">
+                        <tr>
+                            <td>
+                                <span t-field="room.room_number"/>
+                            </td>
+                             <td>
+                                <span t-field="room.room_type"/>
+                            </td>
+                             <td>
+                                 <span t-field="room.currency_id.symbol" />
+                                <span t-field="room.rent" />
+                            </td>
+                             <td>
+                                <span t-field="room.number_of_beds" />
+                            </td>
+                            <td>
+                                <span t-field="room.state"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+</odoo>
