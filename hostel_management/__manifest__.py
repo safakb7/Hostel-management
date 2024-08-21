@@ -48,17 +48,20 @@
         'wizard/student_wizard_views.xml',
 
         'wizard/leave_request_wizard_views.xml',
-
         'views/student_register_template.xml',
+        'views/thankyou_message.xml',
+        'views/available_room_template.xml',
         'views/student_register_views.xml',
 
-        'views/available_room_template.xml',
         'views/available_room_views.xml',
-        'views/thankyou_message.xml',
+
+
 
     ],
+    'css': ['hostel_management/static/src/css/style.css'],
     'assets': {
         'web.assets_backend': [
             'hostel_management/static/src/js/action_manager.js',
+
         ],
     }}

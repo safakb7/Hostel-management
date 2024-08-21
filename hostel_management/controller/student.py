@@ -11,14 +11,13 @@ class StudentFormController(Controller):
            website=True)
     def available_rooms(self, **kw):
         available_rooms = request.env['hostel.room'].search([
-            '|', ('state', '=', 'empty'), ('state', '=', 'partial')
+            ('state','in',['empty','partial'])
         ])
         return request.render('hostel_management.available_rooms', {
             'rooms': available_rooms
         })
 
-    @route('/student/form/submit', type='http', auth='public', website=True
-          )
+    @route('/student/form/submit', type='http', auth='public', website=True)
     def student_form_submit(self, **post):
         request.env['hostel.student'].sudo().create({
                     'name': post.get('name'),

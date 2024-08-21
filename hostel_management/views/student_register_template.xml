@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="student_register_template" name="student register">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet"
+                  href="/hostel_management/static/src/css/style.css"/>
+        </xpath>
         <t t-call="website.layout">
             <div id="wrap" class="oe_structure oe_empty">
                 <section
@@ -14,10 +18,11 @@
                         <h1>Student Registration</h1>
                     </div>
                 </section>
-                <section  class="s_website_form" data-vcss="001" data-snippet="s_website_form">
-                    <div class="container">
-                        <form action="/student/form/submit" method="post" enctype="multipart/form-data" class="o_mark_required">
-                            <div class="s_website_form_rows row s_col_no_bgcolor">
+                <div class="container">
+                    <form action="/student/form/submit" method="post"
+                          enctype="multipart/form-data" class="o_mark_required"
+                          data-pre-fill="true">
+                        <div class="s_website_form_rows row s_col_no_bgcolor">
 
                             <input type="hidden" name="csrf_token"
                                    t-att-value="request.csrf_token()"/>
@@ -26,8 +31,9 @@
                                      data-type="char" data-name="Field">
                                     <div class="row s_col_no_resize s_col_no_bgcolor">
                                         <label class="col-form-label col-sm-auto s_website_form_label"
-                                               style="width: 200px"
+                                               style="width: 200px" for="name"
                                         >
+
                                             <span class="s_website_form_label_content">
                                                 Name
                                             </span>
@@ -38,8 +44,7 @@
                                         <div class="col-sm">
                                             <input id="name" type="text"
                                                    class="form-control s_website_form_input"
-                                                   name="name" required="True"
-                                            />
+                                                   name="name" required=""/>
                                         </div>
                                     </div>
                                 </div>
@@ -48,7 +53,7 @@
                                     <div class="row s_col_no_resize s_col_no_bgcolor">
                                         <label class="col-form-label col-sm-auto s_website_form_label"
                                                style="width: 200px"
-                                               for="contact2">
+                                               for="phone">
                                             <span class="s_website_form_label_content">
                                                 Phone Number
                                             </span>
@@ -65,7 +70,7 @@
                                     <div class="row s_col_no_resize s_col_no_bgcolor">
                                         <label class="col-form-label col-sm-auto s_website_form_label"
                                                style="width: 200px"
-                                               for="contact3">
+                                               for="email">
                                             <span class="s_website_form_label_content">
                                                 Email
                                             </span>
@@ -76,7 +81,7 @@
                                         <div class="col-sm">
                                             <input id="email" type="email"
                                                    class="form-control s_website_form_input"
-                                                   name="email" required="True"/>
+                                                   name="email" required=""/>
                                         </div>
                                     </div>
                                 </div>
@@ -98,20 +103,20 @@
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="mb-0 py-2 col-8"
                                      data-name="Submit Button">
                                     <div style="width: 200px;"
                                          class="s_website_form_label"/>
                                     <button type="submit"
-                                            class="btn btn-primary ">
+                                            class="btn btn-primary s_website_form_send">
                                         Register
                                     </button>
                                 </div>
                             </div>
-                                                                        </div>
-                        </form>
-                    </div>
-                </section>
+                        </div>
+                    </form>
+                </div>
             </div>
         </t>
     </template>
