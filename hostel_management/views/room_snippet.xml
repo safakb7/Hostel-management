@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="latest_room_template" name="Latest Room">
+        <section class="oe_structure container dynamic_snippet_blog">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center py-5">
+                        <h1 class="h1">Latest Room</h1>
+                        <div class="h3" style="text-align:center">Latest Room
+                        </div>
+                        <div id="courosel">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+    <template id="basic_snippet" inherit_id="website.snippets"
+              name="Latest Room Snippet">
+        <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]"
+               position="after">
+
+            <t t-snippet="hostel_management.latest_room_template"
+               t-thumbnail="/hostel_management/static/src/img/img2.avif"/>
+        </xpath>
+    </template>
+</odoo>
