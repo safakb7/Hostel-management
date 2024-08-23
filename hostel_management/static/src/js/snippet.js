@@ -1,30 +1,44 @@
 /** @odoo-module */
-import PublicWidget from "@web/legacy/js/public/public_widget";
+
+import publicWidget from "@web/legacy/js/public/public_widget";
 import { jsonrpc } from "@web/core/network/rpc_service";
-import { renderToElement } from "@web/core/utils/render";
+import { renderToFragment } from "@web/core/utils/render";
+import { registry } from "@web/core/registry";
+
+console.log('abc')
 export function _chunk(array, size) {
     const result = [];
-
+    for (let i = 0; i < array.length; i += size) {
+        result.push(array.slice(i, i + size));
     }
     return result;
 }
-var TopLatestRoom = PublicWidget.Widget.extend({
-        selector: '.latest_rooms',
-        willStart: async function () {
-            const data = await jsonrpc('/latest_rooms', {})
-            const [website_id] = data
-            Object.assign(this, {
-                website_id
-            })
-        },
-        start: function () {
-            const refEl = this.$el.find("#courosel")
-            const { current_website_id } = this
-            refEl.html(renderToElement(hostel_management.latest_room', {
-                current_website_id,
-                chunkData
-            }))
-        }
-    });
-PublicWidget.registry.top_latest_room_snippet = TopLatestRoom;
-return TopLatestRoom;
+
+var LatestRoom = publicWidget.Widget.extend({
+        selector: '.latest_room_snippets',
+
+willStart: async function() {
+        	var self = this;
+        	await jsonrpc(
+            	 '/latest_rooms'
+        	).then((data) => {
+            	this.data = data;
+//            	console.log(data)
+        	});
+
+    	},
+    	start: function() {
+    	    console.log('data',this.data)
+        	const chunks = _chunk(this.data, 4)
+            console.log('chunks',chunks)
+
+        	chunks[0].is_active = true
+//        	console.log(chunks,'abc')
+        	this.$el.find('#latest_rooms').html(renderToFragment('hostel_management.latest_room_carousel', {
+                	chunks
+            	})
+        	)
+    	},
+	});
+	publicWidget.registry.room = LatestRoom;
+	return LatestRoom;

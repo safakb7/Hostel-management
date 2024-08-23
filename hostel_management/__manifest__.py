@@ -10,7 +10,7 @@
     'sequence': "5",
     'depends':
         [
-            'base',
+            'web',
             'mail',
             'product',
             'sale',
@@ -57,12 +57,15 @@
         'views/room_snippet.xml',
 
     ],
-    'css': ['hostel_management/static/src/css/style.css'],
+    # 'css': ['hostel_management/static/src/css/style.css'],
     'assets': {
         'web.assets_backend': [
             'hostel_management/static/src/js/action_manager.js',
-            # 'hostel_management/static/src/js/snippet.js',
-            # 'hostel_management/static/src/xml/latest_room_template.xml',
+
+        ],
+        'web.assets_frontend': [
+            'hostel_management/static/src/js/snippet.js',
+             'hostel_management/static/src/xml/latest_room_template.xml',
 
         ],
     }}

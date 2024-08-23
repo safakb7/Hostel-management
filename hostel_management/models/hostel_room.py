@@ -37,6 +37,9 @@ class HostelRoom(models.Model):
     pending_amount = fields.Float('Pending Amount',
                                   compute='_compute_pending_amount', store=True)
 
+    image = fields.Binary(help="Select image here")
+
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

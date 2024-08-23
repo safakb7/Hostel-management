@@ -6,6 +6,7 @@ class RoomSnippet(http.Controller):
     @http.route(['/latest_rooms'], type="json", auth="public",
                 website=True, methods=['POST'])
     def latest_room(self):
-        Rooms = http.request.env['hostel.room'].search(
-            ('state', 'in', ['empty', 'partial']),limit=4)
-        return Rooms
+        room = http.request.env['hostel.room'].search_read([],
+         ['room_number', 'image', 'id'], limit=4)
+        print(room)
+        return room
