@@ -2,8 +2,14 @@
 <odoo>
     <template id="latest_room_template" name="Latest Room">
         <section class="latest_room_snippets">
-            <div id="latest_rooms">
-                <h1 class="h1">Latest Room</h1>
+            <div clas="row">
+                <div class="text-center py-5">
+                    <div class="h4">Latest Room</div>
+                    <div class="call-md-12">
+                        <div id="latest_rooms">
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </template>
@@ -11,7 +17,6 @@
               name="Latest Room Snippet">
         <xpath expr="//div[@id='snippet_effect']//t[@t-snippet][last()]"
                position="after">
-
             <t t-snippet="hostel_management.latest_room_template"
                t-thumbnail="/hostel_management/static/src/img/img2.avif"/>
         </xpath>

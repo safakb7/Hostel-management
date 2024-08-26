@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="room_data_snippet" name="room data">
+        <t t-call="website.layout">
+            <section class="  oe_structure oe_empty">
+                <div class="container ">
+                    <t t-foreach="room" t-as="data">
+                        <div class=" m-auto">
+                            <div class="card" style="width: 30rem;">
+                                <img class="card-img-top"
+                                     t-attf-src="data:image/png;base64,{{data.image}}"/>
+                                <div class="card-body">
+
+                                    <h5 class="card-title">
+                                        <span t-out="data.room_number"/>
+                                    </h5>
+                                    <div>
+                                        Room Type :
+                                        <span t-out="data.room_type"/>
+                                    </div>
+                                    <div>
+                                        Rent : $
+                                        <span t-out="data.total_rent"/>
+                                    </div>
+                                    <div>
+                                        Number of Beds :
+                                        <span t-out="data.number_of_beds"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </section>
+        </t>
+    </template>
+</odoo>

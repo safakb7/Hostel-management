@@ -4,11 +4,11 @@
               parent="hostel_menu_root"
               groups="hostel_management.group_warden"/>
 
-    <menuitem id="hostel_student_report_menu" sequence="10" name="Student"
-              parent="hostel_report_menu" action="student_wizard_action"
-    />
-    <menuitem id="leave_request_report_menu"  name="Leave request"
-              parent="hostel_report_menu" action="leave_request_wizard_action"
-    />
+<!--    <menuitem id="hostel_student_report_menu" sequence="10" name="Student"-->
+<!--              parent="hostel_report_menu" action="student_wizard_action"-->
+<!--    />-->
+<!--    <menuitem id="leave_request_report_menu"  name="Leave request"-->
+<!--              parent="hostel_report_menu" action="leave_request_wizard_action"-->
+<!--    />-->
 
 </odoo>

@@ -55,9 +55,10 @@
 
         'views/available_room_views.xml',
         'views/room_snippet.xml',
+        'views/room_data_template.xml',
 
     ],
-    # 'css': ['hostel_management/static/src/css/style.css'],
+    'css': ['hostel_management/static/src/css/style.css'],
     'assets': {
         'web.assets_backend': [
             'hostel_management/static/src/js/action_manager.js',
