@@ -1,21 +1,15 @@
 /** @odoo-module */
-
-import publicWidget from "@web/legacy/js/public/public_widget";
+import PublicWidget from "@web/legacy/js/public/public_widget";
 import { jsonrpc } from "@web/core/network/rpc_service";
 
-var button = publicWidget.widget.extends
-{
-        selector:'.oe_website_sale'
-}
-      $(oe_website_sale).on("click", "#clear_cart_button",
-      function () {
-
-        await.jsonrpc("/shop/clear_cart").then(function()
-        {
-           location.reload();
-         })
-        })
-
-publicWidget.registry.demo = button;
-	return button;
+PublicWidget.registry.cart = PublicWidget.Widget.extend
+({
+    selector: '.oe_website_sale',
+    events: {
+        'click #clear_cart_button':'_onButtonClick',
+    },
+    _onButtonClick: async function(ev){
+        await jsonrpc('/shop/clear_cart', )
+        window.location.reload();
+    },
 })
