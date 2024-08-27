@@ -1,0 +1,27 @@
+<odoo>
+
+    <template id="cart_view" inherit_id="website_sale.cart_lines">
+        <xpath expr="//div[@id='cart_products']" position="inside">
+            <div class=" col-3 ">
+
+            <button type="button" id="clear_cart_button" class="btn btn-primary">
+                Clear Cart
+            </button>
+            </div>
+        </xpath>
+    </template>
+</odoo>
+
+
+from odoo import http
+from odoo.http import request
+
+
+class CustomClearCart(http.Controller):
+
+    @http.route('/shop/clear_cart', type='json', auth='public', methods=['POST'])
+    def clear_cart(self):
+        sale_order = request.website.sale_get_order()
+        if sale_order:
+            sale_order.order_line.unlink()
+        return True
