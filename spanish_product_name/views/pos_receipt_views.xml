@@ -1,0 +1,10 @@
+<!-- In your custom module's views/pos_receipt_template.xml -->
+<odoo>
+    <template id="pos_receipt" name="POS Receipt">
+        <xpath expr="//tr[@class='product_line']" position="inside">
+            <td t-if="line.product.name_es" class="product_name">
+                <t t-esc="line.product.name_es"/>
+            </td>
+        </xpath>
+    </template>
+</odoo>
