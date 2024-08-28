@@ -9,7 +9,7 @@ PublicWidget.registry.cart = PublicWidget.Widget.extend
         'click #clear_cart_button':'_onButtonClick',
     },
     _onButtonClick: async function(ev){
-        await jsonrpc('/shop/clear_cart', )
-        window.location.reload();
+        await jsonrpc('/shop/clear_cart')
+       location.reload();
     },
 })
