@@ -1,0 +1,15 @@
+<template>
+    <t t-name="OrderLinesReceipt" t-inherit="point_of_sale.receipt"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//t[@t-foreach='receipt.orderlines']" position="inside">
+            <t t-if="line.spanish_name">
+                <t t-foreach="line.spanish_name" t-as="product"
+                   t-key="product.id">
+                    <div class="receipt-product">
+                        <t t-esc="product.name"/>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </t>
+</template>
