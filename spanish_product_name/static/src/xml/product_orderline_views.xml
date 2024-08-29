@@ -1,0 +1,15 @@
+<templates id="template_order_line" xml:space="preserve">
+    <t t-name="spanish_product_name.spanishname" t-inherit="point_of_sale.Orderline"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//ul[hasclass('info-list')]" position="before">
+            <div>
+                            <t t-esc="props.spanish_name"/>
+
+            </div>
+<!--            <div class="spanish">-->
+<!--                            <h1>hlo</h1>-->
+
+<!--            </div>-->
+        </xpath>
+    </t>
+</templates>
