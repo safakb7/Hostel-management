@@ -3,7 +3,7 @@
        t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('product-content')]" position="inside">
             <div>
-                <t t-esc="spanish_name"/>
+                <t t-esc="props.spanish_name"/>
                 <t t-out="spanish_name"/>
             </div>
         </xpath>
