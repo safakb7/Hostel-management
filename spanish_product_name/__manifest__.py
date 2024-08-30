@@ -11,16 +11,7 @@
 
     'assets': {
         'point_of_sale._assets_pos': [
-            'spanish_product_name/static/src/js/product_order_line.js',
-             'spanish_product_name/static/src/xml/product_orderline_views.xml',
-
-            # 'spanish_product_name/static/src/js/product_product.js',
-
-            # 'spanish_product_name/static/src/js/spanish_product_name.js',
-
-            # 'spanish_product_name/static/src/xml/product_card_views.xml'
-
-
+            'spanish_product_name/static/src/**/*',
 
         ],
     }
