@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="ProductWidget" t-inherit="point_of_sale.ProductsWidget"
+       t-inherit-mode="extension" owl="1">
+        <xpath expr="//ProductCard" position="attributes">
+            <attribute name="spanish_name" add="product.spanish_name"/>
+        </xpath>
+    </t>
+</templates>

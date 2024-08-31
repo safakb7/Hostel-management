@@ -1,12 +1,11 @@
-<!--<odoo>-->
-<!--    <templates>-->
-<!--    <t t-name="ProductCard" t-inherit="point_of_sale.ProductCard"-->
-<!--       t-inherit-mode="extension" owl="1">-->
-<!--        <xpath expr="//div[hasclass('price-tag')]" position="before">-->
-<!--            <div class="spanish">-->
-<!--                <t t-esc="props.spanish_name"/>-->
-<!--            </div>-->
-<!--        </xpath>-->
-<!--    </t>-->
-<!--</templates>-->
-<!--</odoo>-->
+///** @odoo-module */
+//import { patch } from "@web/core/utils/patch";
+//import { PosStore } from "@point_of_sale/app/store/pos_store";
+//
+//patch(PosStore.prototype, {
+//     async _processData(loadedData) {
+//        await super._processData(...arguments);
+//        this.product_product = loadedData["product.product"];
+//        console.log(loadedData)
+//        }
+//});
