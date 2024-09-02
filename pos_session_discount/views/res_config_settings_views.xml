@@ -12,9 +12,9 @@
                    position="after">
                     <label for="is_discount_limit"/>
                     <field name="is_discount_limit"/>
-                    <div class="content-group"
+                    <div class="content-group mt-16"
                          invisible="not is_discount_limit">
-                        <div class="mt16">
+                        <div class="content-group mt16">
                             <label for="discount_limit"/>
                             <field name="discount_limit"/>
                         </div>

@@ -11,9 +11,14 @@
     'depends': [
         'base',
         'point_of_sale'
-],
-'data': [
-    'views/res_config_settings_views.xml',
-
-],
+    ],
+    'data': [
+        'views/res_config_settings_views.xml',
+        'views/pos_order_line_views.xml',
+    ],
+    'assets': {
+        'point_of_sale._assets_pos': [
+            'pos_session_discount/static/src/**/*',
+        ],
+    }
 }

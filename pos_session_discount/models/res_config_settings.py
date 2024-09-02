@@ -4,9 +4,7 @@ from odoo import models, fields
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
-    is_discount_limit = fields.Boolean(string='Session Discount limit',
-                                       config_parameter=
-                                       'session_discount.is_discount_limit')
-    discount_limit = fields.Float(string='Limit',
-                                  config_parameter=
-                                  'session_discount.discount_limit')
+    is_discount_limit = fields.Boolean(related='pos_config_id.is_discount_limit',
+                                       readonly=False)
+    discount_limit = fields.Float(related='pos_config_id.discount_limit',
+                                  readonly=False)

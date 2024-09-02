@@ -14,4 +14,3 @@ class ManagerApprove(models.Model):
             ('employee_id', '=', self.employee_id.id)
             ]).write({'state': 'approved'})
         self.employee_id.company_id = self.company_id
-
