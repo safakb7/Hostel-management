@@ -9,6 +9,8 @@
     'website': '',
     'depends': ['payment'],
     'data': [
+        'views/payment_provider.xml',
+        'data/payment_provider_data.xml'
 
     ],
     # 'post_init_hook': 'post_init_hook',
