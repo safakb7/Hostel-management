@@ -7,7 +7,6 @@
             <div class="btn btn-light rounded-0 " t-on-click="(ev) => this.onLineClick(props.test_line)">
                  <i class="fa fa-close"/>
             </div>
-
         </xpath>
     </t>
 </templates>
