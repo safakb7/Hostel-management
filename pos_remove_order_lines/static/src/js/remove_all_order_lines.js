@@ -19,4 +19,3 @@ export class DeleteOrderLines extends Component {
     }
     }
 ProductScreen.addControlButton({ component: DeleteOrderLines });
-
