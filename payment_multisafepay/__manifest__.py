@@ -11,6 +11,8 @@
     'data': [
         'views/payment_provider.xml',
         'views/payment_multisafepay_template.xml',
+        'data/payment_method_data.xml',
+
         'data/payment_provider_data.xml',
 
 

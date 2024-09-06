@@ -8,7 +8,9 @@
         <field name="arch" type="xml">
             <group name="provider_credentials" position="inside">
                 <group invisible="code != 'multisafepay'">
-                    <field name="multisafepay_api_key" string="API Key" required="code == 'multisafepay' and state != 'disabled'" password="True"/>
+                    <field name="multisafepay_api_key" string="API Key"
+                           required="code == 'multisafepay' and state != 'disabled'"
+                           password="True"/>
                 </group>
             </group>
         </field>
