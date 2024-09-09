@@ -1,5 +1,7 @@
 import pprint
 
+from werkzeug.exceptions import Forbidden
+
 from odoo import http
 from odoo.exceptions import ValidationError
 from odoo.http import request, _logger
@@ -12,8 +14,7 @@ class MultisafepayController(http.Controller):
     @http.route(
         _return_url, type='http', auth='public', methods=['GET', 'POST'],
         csrf=False,
-        save_session=False )
-
+        save_session=False)
     def multisafepay_return_from_checkout(self, _logger=None, **data):
 
         _logger.info("handling redirection from Multisafepay with data:\n%s",

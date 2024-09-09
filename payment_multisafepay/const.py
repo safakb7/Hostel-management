@@ -6,3 +6,4 @@ SUPPORTED_CURRENCIES = [
     'USD',
 
 ]
+
