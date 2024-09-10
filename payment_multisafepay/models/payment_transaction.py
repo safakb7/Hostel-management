@@ -3,8 +3,10 @@ import pprint
 
 from werkzeug import urls
 
-from odoo.addons.payment_multisafepay.controllers.main import \
-    MultisafepayController
+
+from odoo.addons.payment_multisafepay.controllers.main import MultisafepayController
+
+from odoo.addons.payment_multisafepay import const
 from odoo import _, models
 from odoo.exceptions import ValidationError
 
@@ -19,72 +21,70 @@ class PaymentTransaction(models.Model):
         if self.provider_code != 'multisafepay':
             return res
 
-        print("processing values",processing_values)
-
+        print("processing values", processing_values)
         payload = self._multisafepay_prepare_payment_request_payload()
         _logger.info("sending '/payments' request for link creation:\n%s",
                      pprint.pformat(payload))
         payment_data = self.provider_id._multisafepay_make_request('/payments',
-                                                             data=payload)
-        print('payment_data',payload, payment_data.json())
-        # self.provider_reference = payment_data.get('id')
+                                                                   data=payload)
+        print("provider",self.provider_id)
 
         response_data = payment_data.json()
-        print("response",response_data)
+        print("response_data", response_data)
+
         checkout_url = response_data['data']['payment_url']
-        print("checkout",checkout_url)
+        print("checkout", checkout_url)
 
         parsed_url = urls.url_parse(checkout_url)
         url_params = urls.url_decode(parsed_url.query)
         print(url_params)
 
         test = {'api_url': checkout_url, 'url_params': url_params}
-        print("test",test)
+        print("test", test)
         return test
 
     def _multisafepay_prepare_payment_request_payload(self):
         base_url = self.provider_id.get_base_url()
-        redirect_url = urls.url_join(base_url,
-                                     MultisafepayController._return_url)
-        webhook_url = urls.url_join(base_url,
-                                    MultisafepayController._webhook_url)
-
         return {
             'order_id': self.reference,
             'currency': self.currency_id.name,
-            'amount': self.amount,
-            'description': "Test order description",
+            'amount': self.amount * 100,
+            'description': self.reference,
 
             "payment_options": {
-                "notification_url": "https://www.example.com/client/notification?type=notification",
+                "notification_url": urls.url_join(base_url,
+                                                  MultisafepayController._notification_url),
                 "notification_method": "POST",
-                "redirect_url": "https://www.example.com/client/notification?type=redirect",
-                "cancel_url": "https://www.example.com/client/notification?type=cancel",
+                "redirect_url": urls.url_join(base_url,
+                                              MultisafepayController._return_url),
             },
             "customer": {
                 "first_name": self.partner_name,
-                "address1":self.partner_address,
+                "last_name": self.partner_name,
+                "address1": self.partner_address,
                 "zip_code": self.partner_zip,
                 "city": self.partner_city,
-                "country": self.partner_country_id.code,
+                "country": self.partner_country_id.name,
                 "phone": self.partner_phone,
                 "email": self.partner_email,
-            },
-            'redirectUrl': f'{redirect_url}?ref={self.reference}',
-            'webhookUrl': f'{webhook_url}?ref={self.reference}',
+            }
         }
 
     def _get_tx_from_notification_data(self, provider_code, notification_data):
-        tx = super()._get_tx_from_notification_data(provider_code, notification_data)
+        tx = super()._get_tx_from_notification_data(provider_code,
+                                                    notification_data)
         if provider_code != 'multisafepay' or len(tx) == 1:
             return tx
 
+        print('notification_data', notification_data.get('transactionid'), notification_data)
         tx = self.search(
-            [('reference', '=', notification_data.get('ref')), ('provider_code', '=', 'multisafepay')]
+            [('reference', '=', notification_data.get('transactionid')),
+             ('provider_code', '=', 'multisafepay')]
         )
         if not tx:
             raise ValidationError("Multisafepay: " + _(
-                "No transaction found matching reference %s.", notification_data.get('ref')
+                "No transaction found matching reference %s.",
+                notification_data.get('ref')
             ))
         return tx
 
@@ -94,18 +94,21 @@ class PaymentTransaction(models.Model):
             return
 
         payment_data = self.provider_id._multisafepay_make_request(
-            f'/payments/{self.provider_reference}', method="GET"
+            f'/payments/{self.provider_reference}', method="GET" , data=notification_data
         )
-
+        payment_data = payment_data.json()
         payment_method_type = payment_data.get('method', '')
         if payment_method_type == 'creditcard':
-            payment_method_type = payment_data.get('details', {}).get('cardLabel', '').lower()
+            payment_method_type = payment_data.get('details', {}).get(
+                'cardLabel', '').lower()
         payment_method = self.env['payment.method']._get_from_code(
             payment_method_type, mapping=const.PAYMENT_METHODS_MAPPING
         )
         self.payment_method_id = payment_method or self.payment_method_id
 
-        payment_status = payment_data.get('status')
+        if payment_data.get('success'):
+            payment_status = 'paid'
+
         if payment_status == 'pending':
             self._set_pending()
         elif payment_status == 'authorized':
@@ -113,12 +116,16 @@ class PaymentTransaction(models.Model):
         elif payment_status == 'paid':
             self._set_done()
         elif payment_status in ['expired', 'canceled', 'failed']:
-            self._set_canceled("Multisafepay: " + _("Canceled payment with status: %s", payment_status))
+            self._set_canceled(
+                "Multisafepay: " + _("Canceled payment with status: %s",
+                                     payment_status))
         else:
             _logger.info(
                 "received data with invalid payment status (%s) for transaction with reference %s",
                 payment_status, self.reference
             )
             self._set_error(
-                "Multisafepay: " + _("Received data with invalid payment status: %s", payment_status)
+                "Multisafepay: " + _(
+                    "Received data with invalid payment status: %s",
+                    payment_status)
             )

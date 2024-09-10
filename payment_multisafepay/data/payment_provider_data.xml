@@ -10,5 +10,4 @@
                eval="[Command.set([
                    ref('payment_multisafepay.payment_method_multisafepay')])]"/>
     </record>
-
 </odoo>
