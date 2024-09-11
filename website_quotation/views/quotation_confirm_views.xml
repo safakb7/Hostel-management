@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="quotation_confirm" inherit_id="sale_order_portal_template">
+        <xpath expr="//div[hasclass='o_portal_sale_sidebar']" position="inside">
+            <button type="button"
+                    id="confirm_quotation" class="btn btn-primary">
+                Confirm
+            </button>
+        </xpath>
+    </template>
+</odoo>

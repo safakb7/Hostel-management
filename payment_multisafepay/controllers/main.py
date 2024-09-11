@@ -13,7 +13,6 @@ class MultisafepayController(http.Controller):
         csrf=False,
         save_session=False)
     def multisafepay_return_from_checkout(self, **data):
-        print("hi", data)
         request.env['payment.transaction'].sudo()._handle_notification_data(
             'multisafepay', data)
         return request.redirect('/payment/status')

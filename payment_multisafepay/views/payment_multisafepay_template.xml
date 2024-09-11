@@ -7,7 +7,6 @@
               <t t-foreach="url_params" t-as="param">
                   <input type="hidden" t-att-name="param" t-att-value="url_params[param]" />
               </t>
-
         </form>
     </template>
 
