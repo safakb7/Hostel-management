@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <template id="quotation_confirm" inherit_id="sale_order_portal_template">
-        <xpath expr="//div[hasclass='o_portal_sale_sidebar']" position="inside">
-            <button type="button"
-                    id="confirm_quotation" class="btn btn-primary">
+    <template id="quotation_confirm" inherit_id="sale.sale_order_portal_template">
+            <xpath expr="//div[@id='sale_order_sidebar_button']" position="before">
+                <t t-if="sale_order.state == 'sent'">
+                    <a t-attf-href="/my/quotation/confirm/#{sale_order.id}"
+                       class="btn btn-primary">
                 Confirm
-            </button>
+            </a>
+        </t>
         </xpath>
     </template>
 </odoo>

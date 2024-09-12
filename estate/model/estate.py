@@ -36,6 +36,7 @@ class Estate(models.Model):
 
 
 
+
 # .filtered(
 #             lambda x: x.partner_id == self.partner_id and
 #                       x.date_order.month == self.date_order.month
