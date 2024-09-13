@@ -50,3 +50,64 @@ class Estate(models.Model):
 #     if self.order_id.partner_id.is_only_ordered and self.product_id:
 #         if self.product_id.invoice_policy != 'order':
 #             raise ValidationError("select only ordered qty product")
+
+
+
+# odoo.define('your_module_name.quantity_adjustment', function (require) {
+#     'use strict';
+#
+#     var publicWidget = require('web.public.widget');
+#     var WebsiteSale = require('website_sale.website_sale');
+#
+#     // Override the WebsiteSale widget
+#     publicWidget.registry.WebsiteSale.include({
+#
+#         // Override the _onClickAdd function to add 0.1 to the quantity
+#         _onClickAdd: function (ev) {
+#             ev.preventDefault();
+#             var $input = $(ev.currentTarget).closest('.input-group').find('input');
+#             var oldValue = parseFloat($input.val()) || 0;
+#             var newValue = oldValue + 0.1;
+#             $input.val(newValue.toFixed(1)).trigger('change');
+#         },
+#
+#         // Override the _onClickRemove function to subtract 0.1 from the quantity
+#         _onClickRemove: function (ev) {
+#             ev.preventDefault();
+#             var $input = $(ev.currentTarget).closest('.input-group').find('input');
+#             var oldValue = parseFloat($input.val()) || 0;
+#             var newValue = oldValue - 0.1;
+#             if (newValue >= 0) {  // Ensure the quantity doesn't go below 0
+#                 $input.val(newValue.toFixed(1)).trigger('change');
+#             }
+#         }
+#     });
+# });
+#
+#
+#
+#
+#
+# odoo.define('your_module_name.website_sale', function (require) {
+#     'use strict';
+#
+#     var publicWidget = require('web.public.widget');
+#     publicWidget.registry.WebsiteSale.include({
+#         /**
+#          * Override the _onClickAdd and _onClickRemove methods to increment/decrement by 0.1
+#          */
+#         _onClickAdd: function (ev) {
+#             var $input = $(ev.currentTarget).closest('.input-group').find('input');
+#             var value = parseFloat($input.val()) || 0;
+#             $input.val((value + 0.1).toFixed(1)).trigger('change');
+#         },
+#         _onClickRemove: function (ev) {
+#             var $input = $(ev.currentTarget).closest('.input-group').find('input');
+#             var value = parseFloat($input.val()) || 0;
+#             if (value > 0.1) {
+#                 $input.val((value - 0.1).toFixed(1)).trigger('change');
+#             }
+#         },
+#     });
+# });
+#
