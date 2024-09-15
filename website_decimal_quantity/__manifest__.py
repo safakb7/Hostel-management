@@ -13,6 +13,8 @@
         'website_sale'
     ],
     'data': [
+        # 'views/decimal_quantity_views.xml',
+        #  'views/sale_order_line_views.xml',
 
     ],
 
