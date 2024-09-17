@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="range_slider.RangeField">
+        <div>
+            <label for="slider">
+                <span t-esc="props.value"/></label>
+        <input type="range" id="slider"  min="0" max="10" step="2"
+               t-on-change="(ev) => this.props.update(ev.target.value)"/>
+        </div>
+    </t>
+</templates>
