@@ -1,0 +1,55 @@
+from odoo import models, fields, api
+
+class SearchForm(models.TransientModel):
+    _name = 'search.form'
+    _description = 'Custom Search Form'
+
+    search_text = fields.Char(string='Search', help="Enter text to search")
+    result_ids = fields.Many2many('target.model', string="Results")
+
+    @api.onchange('search_text')
+    def _onchange_search_text(self):
+        if self.search_text:
+            # Search across different fields of the target model
+            domain = ['|', '|', ('field_1', 'ilike', self.search_text), ('field_2', 'ilike', self.search_text), ('field_3', 'ilike', self.search_text)]
+            results = self.env['target.model'].search(domain)
+            self.result_ids = results
+        else:
+            self.result_ids = False
+
+
+
+<odoo>
+    <record id="view_search_form" model="ir.ui.view">
+        <field name="name">search.form.view.form</field>
+        <field name="model">search.form</field>
+        <field name="arch" type="xml">
+            <form string="Search Form">
+                <group>
+                    <field name="search_text" placeholder="Search..." />
+                </group>
+                <group>
+                    <field name="result_ids">
+                        <tree string="Search Results" editable="bottom">
+                            <field name="field_1"/>
+                            <field name="field_2"/>
+                            <field name="field_3"/>
+                        </tree>
+                    </field>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action to open the search form -->
+    <record id="action_search_form" model="ir.actions.act_window">
+        <field name="name">Search Form</field>
+        <field name="res_model">search.form</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <!-- Menu item to trigger the form -->
+    <menuitem id="menu_search_form" name="Search Form" parent="base.menu_custom" action="action_search_form"/>
+</odoo>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="search_view" model="ir.ui.view">
+        <field name="name">search_view</field>
+        <field name="model">search.form</field>
+
+        <field name="arch" type="xml">
+            <form string="Search Form">
+                <group>
+                   <field name="search_text"/>
+                    <button name="action_search" string="search" type="object"
+                            class="btn-primary"/>
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="search_form_action" model="ir.actions.act_window">
+        <field name="name">Search</field>
+        <field name="res_model">search.form</field>
+        <field name="view_mode">form</field>
+    </record>
+    <menuitem id="search_menu_root" name="Search"/>
+    <menuitem id="search_form_menu" name="search form"
+              parent="search_menu_root" action="search_form_action"/>
+</odoo>
