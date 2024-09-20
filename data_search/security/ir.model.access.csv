@@ -1,5 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
-access_search_form_user,access.search.form.user,model_search_form,,1,1,1,1
-access_search_form_lines_user,access.search.form.lines.user,model_search_form_lines,,1,1,1,1
+access_search_data_user,access.search.data.user,model_search_data,,1,1,1,1
+access_search_data_lines_user,access.search.data.lines.user,model_search_data_lines,,1,1,1,1
 
