@@ -6,18 +6,23 @@
 
         <field name="arch" type="xml">
             <form string="Search Form">
-                <group>
-                   <field name="search_text"/>
-                    <button name="action_search" string="search" type="object"
-                            class="btn-primary"/>
-                </group>
+                <sheet>
+                    <group>
+                        <field name="search_text"/>
+                        <field name="model_id"/>
+                        <field name="field_id" />
+                        <button name="action_search" string="search"
+                                type="object"
+                                class="btn-primary"/>
+                    </group>
+                </sheet>
             </form>
         </field>
     </record>
     <record id="search_form_action" model="ir.actions.act_window">
         <field name="name">Search</field>
         <field name="res_model">search.form</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">tree,form</field>
     </record>
     <menuitem id="search_menu_root" name="Search"/>
     <menuitem id="search_form_menu" name="search form"

@@ -13,6 +13,7 @@
 ],
 'data': [
     'views/search_form_views.xml',
+    # 'views/search_form_lines_views.xml',
     'security/ir.model.access.csv',
 
 ],
