@@ -8,6 +8,3 @@ class SearchDataLine(models.Model):
 
     search_id = fields.Many2one('search.data', string='Search Data')
     record_data = fields.Text(string='Record Data')
-
-
-

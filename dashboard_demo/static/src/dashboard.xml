@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-name="dashboard_demo.Dashboard">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-6 mt-3">
+                        <h1>list1</h1>
+                        <ListView t-props="{model:'sale.order' ,limit:10}" />
+                    </div>
+
+<!--                    <div class="col-md-6 mt-3">-->
+<!--                        <h1>list2</h1>-->
+<!--                        <ListView model="purchase.order" limit="20"/>-->
+<!--                    </div>-->
+            </div>
+        </div>
+    </t>
+</templates>

@@ -13,9 +13,8 @@
 ],
 'data': [
     'views/search_data_views.xml',
-    'views/search_data_lines_views.xml',
+    # 'views/search_data_lines_views.xml',
     'views/search_menu_views.xml',
-
     'security/ir.model.access.csv',
 
 ],

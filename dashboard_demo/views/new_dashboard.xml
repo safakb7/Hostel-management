@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="dashboard_action" model="ir.actions.client">
+   <field name="name"> Dashboard</field>
+   <field name="tag">dashboard</field>
+</record>
+   <menuitem id="dashboard_menu_root"
+              name="dashboard" action="dashboard_action"/>
+    <menuitem id="conf_root_menu"
+              name="dashboard Workshop"
+              action="dashboard_action"
+              parent="dashboard_menu_root"
+              sequence="10"/>
+</odoo>

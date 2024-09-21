@@ -40,6 +40,8 @@ class HostelStudent(models.Model):
                              store=True)
     user_id = fields.Many2one('res.users')
 
+    student_data = fields.Json()
+
     def action_allocate_room(self):
         partial = (self.env['hostel.room'].search
                    ([('state', '=', 'partial')], limit=1))
@@ -143,3 +145,9 @@ class HostelStudent(models.Model):
             }
             user = self.env['res.users'].create(user_rec)
             self.user_id = user
+
+    def json_data_store(self):
+        self.student_data = {
+            'name': self.name,
+            'email': self.email,
+        }
