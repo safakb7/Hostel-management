@@ -1,128 +1,13 @@
-from odoo import models, fields, api
+ # model = self.env['ir.model'].browse(self.model_id)
+            # record = self.env['ir.model.fields'].browse(self.record_id)
 
 
-class SearchData(models.Model):
-    _name = 'search.data'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    model_id = fields.Many2one('ir.model', string='Models')
-    field_id = fields.Many2one('ir.model.fields',
-                               string='Applied Fields')
-    search_text = fields.Char(string='Search')
-    search_option = fields.Selection([('contains', 'Contains'),
-                                      ('starts_with', 'Starts With'),
-                                      ('ends_with', 'Ends With'),],
-                                     string='Search options',
-                                     default='contains')
-    record_ids = (fields.One2many('search.data.lines',
-                                  'search_id', string='Record'))
-
-    @api.onchange('model_id')
-    def _onchange(self):
-        """function for changing the field value when changing the model"""
-        self.field_id = False
-
-    def action_view_record(self):
-        """function for list out the corresponding model when
-        we chosen the fields"""
-        if self.model_id and self.field_id and self.search_text:
-            model = self.env['ir.model'].browse(self.model_id.id)
-            print('moded', model)
-            field = self.env['ir.model.fields'].browse(self.field_id.id)
-            print('field', field)
-            domain = [
-                (field.name, self._get_operator(), self._get_search_value())]
-
-            records = self.env[model.model].search(domain)
-            for record in records:
-                self.update({
-                    'record_ids': [(fields.Command.create({
-                        'model_id': model.id,
-                        'field_id': field.field_description,
-                        'record_id': record.id,
-                    }))
-                    ]
-                })
-    def _get_operator(self):
-        """function for matching the field value"""
-        if self.search_option == 'contains':
-            return 'ilike'
-        elif self.search_option == 'starts_with':
-            return '='
-        elif self.search_option == 'ends_with':
-            return '='
-        else:
-            return 'ilike'
-
-    def _get_search_value(self):
-        """function for searching the search option field value"""
-        if self.search_option == 'contains':
-            return '%' + self.search_text + '%'
-        elif self.search_option == 'starts_with':
-            return self.search_text + '%'
-        elif self.search_option == 'ends_with':
-            return '%' + self.search_text
-        else:
-            return self.search_text
-
-<?xml version="1.0" encoding="utf-8" ?>
-<odoo>
-    <record id="search_data_action" model="ir.actions.act_window">
-        <field name="name">Search Data</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">search.data</field>
-        <field name="view_mode">tree,form</field>
-    </record>
-    <!--    form view for search data using filter-->
-    <record id="cleaning_service_view_form" model="ir.ui.view">
-        <field name="name">search.data.view.form</field>
-        <field name="model">search.data</field>
-        <field name="arch" type="xml">
-                <form string="Data Search">
-                    <sheet>
-                        <group>
-                            <field name="model_id"
-                                   options="{'no_quick_create':True,'no_create_edit':True}"/>
-                            <field name="field_id" domain="[('model_id', '=',model_id)]"/>
-                            <field name="search_text"/>
-                            <field name="search_option"/>
-                            <button name="action_view_record" type="object"
-                                    string="Records"
-                                    class="btn-primary"
-                                    />
-                        </group>
-                        <notebook>
-                            <page string="Record Details">
-                                <field name="record_ids" widget="one2many_widget">
-                                    <tree editable="bottom" create="0">
-                                        <field name="model_id"/>
-                                        <field name="field_id"/>
-                                        <field name="record_id"/>
-                                        <button name="action_redirect_to_record"
-                                            string="View Details" type="object"
-                                                help="View record details"
-                                                class="oe_highlight"/>
-                                    </tree>
-                                </field>
-                            </page>
-                        </notebook>
-                    </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids" widget="mail_followers"/>
-                        <field name="message_ids" widget="mail_thread"/>
-                        <field name="activity_ids"/>
-                    </div>
-                </form>
-        </field>
-    </record>
-    <record id="cleaning_service_view_tree" model="ir.ui.view">
-        <field name="name">search.data.view.tree</field>
-        <field name="model">search.data</field>
-        <field name="arch" type="xml">
-                <tree>
-                    <field name="model_id"/>
-                    <field name="field_id"/>
-                </tree>
-        </field>
-    </record>
-</odoo>
+             # else:
+        #     return {
+        #         'type': 'ir.actions.client',
+        #         'params': {
+        #             'title': _('Error'),
+        #             'message': _('Model or Record ID not found.'),
+        #         }
+        #     }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-<!-- root menu for Search Data  -->
     <menuitem id="data_search_menu_root"
               name="Data Search"
     />
-    <menuitem id="data_search_menu_main"
+    <menuitem id="data_search_menu"
               name="Search Contents"
               parent="data_search_menu_root"
               action="search_data_action"
