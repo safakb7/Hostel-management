@@ -12,21 +12,20 @@ class SearchData(models.Model):
                                string='Field')
     search_text = fields.Char(string='Search text')
     record_ids = fields.One2many('search.data.lines',
-                                  'search_id', string='Record')
+                                 'search_id', string='Record')
 
     @api.onchange('model_id')
     def _onchange(self):
         self.field_id = False
 
     def action_search(self):
-        record_ids = []
         self.record_ids.unlink()
         if self.model_id and self.field_id and self.search_text:
 
             records = self.env[self.model_id.model].search([(self.field_id.name,
-                                                    'ilike', self.search_text)])
-
-            print(records)
+                                                             'ilike',
+                                                             self.search_text)])
+            print('records',records)
             for record in records:
                 self.update({
                     'record_ids': [(fields.Command.create({
@@ -37,19 +36,17 @@ class SearchData(models.Model):
                     ]
                 })
         if not self.field_id:
-            print("euwr")
             field = self.env['ir.model.fields'].search(
-                [('model_id', "=", self.model_id.id),('ttype','=','char')])
+                [('model_id', "=", self.model_id.id), ('ttype', '=', 'char')])
             print(field)
 
             for rec in field:
-                print(rec.name)
+                print("rec", rec.name)
+                print("search_text", self.search_text)
                 records = self.env[self.model_id.model].search(
-                    [(rec.name,'ilike', self.search_text)])
+                    [(rec.name, 'ilike', self.search_text), ()])
                 print(records)
                 for record in records:
-                    print((record.name))
-
                     self.update({
                         'record_ids': [(fields.Command.create({
                             'model_id': self.model_id.id,
@@ -58,3 +55,13 @@ class SearchData(models.Model):
                         }))
                         ]
                     })
+
+
+
+
+
+
+
+
+
+
