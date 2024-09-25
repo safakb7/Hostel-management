@@ -11,3 +11,47 @@
         #             'message': _('Model or Record ID not found.'),
         #         }
         #     }
+
+
+        def action_search(self):
+        self.ensure_one()
+        record_ids = []
+        self.record_ids.unlink()
+        if self.model_id and self.field_id and self.search_text:
+
+            records = self.env[self.model_id.model].search([(self.field_id.name,
+                                                    'ilike', self.search_text)])
+
+            for record in records:
+                self.update({
+                    'record_ids': [(fields.Command.create({
+                        'model_name': self.model_id.name,
+                        'field_name': self.field_id.field_description,
+                        'model_id': self.model_id.id,
+                        'field_id': self.field_id.id,
+                        'record_id': record.id,
+                    }))
+                    ]
+                })
+        if not self.field_id:
+            searchable_fields = self.env[self.model_id.model]._fields.items()
+            domain = []
+            for field_name, field in searchable_fields:
+                if field.type in ['char', 'text', 'html']:
+                    domain.append((field_name, 'like', self.search_text))
+            for i in range(len(domain)-1):
+                domain.insert(0, '|')
+            records = self.env[self.model_id.model].search(domain)
+            for record in records:
+                record_ids.append(fields.Command.create({
+                    'model_name': self.model_id.name,
+                    # 'field_name': rec.field_description,
+                    'model_id': self.model_id.id,
+                    'field_id': self.field_id.id,
+                    # 'field_value': record[rec.name],
+                    'record_id': record.id,
+                }))
+            self.update({
+                'record_ids': record_ids
+            })
+
