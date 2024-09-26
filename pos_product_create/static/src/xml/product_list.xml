@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_create_list.ProductListModal" owl="1">
+        <div class="modal fade" id="productListModal" tabindex="-1"
+             role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Product List</h5>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <t t-foreach="state.products" t-as="product">
+                                <li>
+                                    <t t-esc="product.display_name"/>
+                                    <t t-log="product.display_name"/>
+                                    <t t-esc="product.list_price"/>
+                                    <t t-log="product.list_price"/>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

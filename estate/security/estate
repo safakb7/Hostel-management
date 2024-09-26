@@ -1,57 +1,80 @@
- # model = self.env['ir.model'].browse(self.model_id)
-            # record = self.env['ir.model.fields'].browse(self.record_id)
+odoo.define('custom_pos_button.productListModal', function (require) {
+    "use strict";
+
+    const { Component } = owl;
+    const { useState } = owl.hooks;
+
+    class ProductListModal extends Component {
+        constructor() {
+            super(...arguments);
+            this.state = useState({
+                products: [],
+            });
+        }
+
+        async show(products) {
+            this.state.products = products;
+            // Show modal logic (e.g., using a DOM manipulation)
+            this.render();
+        }
+
+        close() {
+            // Logic to close the modal
+            this.state.products = []; // Clear products
+            this.render();
+        }
+    }
+
+    ProductListModal.template = 'ProductListModal'; // Reference to your XML template
+
+    return ProductListModal;
+});
 
 
 
-             # else:
-        #     return {
-        #         'type': 'ir.actions.client',
-        #         'params': {
-        #             'title': _('Error'),
-        #             'message': _('Model or Record ID not found.'),
-        #         }
-        #     }
 
+<odoo>
+    <template id="ProductListModal">
+        <div class="modal fade" id="productListModal" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Product List</h5>
+                        <button type="button" class="close" t-on-click="close" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <ul>
+                            <t t-foreach="state.products" t-as="product">
+                                <li>
+                                    <t t-esc="product.display_name"/> - <t t-esc="product.list_price"/>
+                                </li>
+                            </t>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>
 
-        def action_search(self):
-        self.ensure_one()
-        record_ids = []
-        self.record_ids.unlink()
-        if self.model_id and self.field_id and self.search_text:
+odoo.define('custom_pos_button.custom_pos', function (require) {
+    "use strict";
 
-            records = self.env[self.model_id.model].search([(self.field_id.name,
-                                                    'ilike', self.search_text)])
+    const PosComponent = require('point_of_sale.PosComponent');
+    const Registries = require('point_of_sale.Registries');
+    const ProductListModal = require('custom_pos_button.productListModal'); // Import the modal component
 
-            for record in records:
-                self.update({
-                    'record_ids': [(fields.Command.create({
-                        'model_name': self.model_id.name,
-                        'field_name': self.field_id.field_description,
-                        'model_id': self.model_id.id,
-                        'field_id': self.field_id.id,
-                        'record_id': record.id,
-                    }))
-                    ]
-                })
-        if not self.field_id:
-            searchable_fields = self.env[self.model_id.model]._fields.items()
-            domain = []
-            for field_name, field in searchable_fields:
-                if field.type in ['char', 'text', 'html']:
-                    domain.append((field_name, 'like', self.search_text))
-            for i in range(len(domain)-1):
-                domain.insert(0, '|')
-            records = self.env[self.model_id.model].search(domain)
-            for record in records:
-                record_ids.append(fields.Command.create({
-                    'model_name': self.model_id.name,
-                    # 'field_name': rec.field_description,
-                    'model_id': self.model_id.id,
-                    'field_id': self.field_id.id,
-                    # 'field_value': record[rec.name],
-                    'record_id': record.id,
-                }))
-            self.update({
-                'record_ids': record_ids
-            })
+    class CustomButton extends PosComponent {
+        async showProductList() {
+            const products = this.env.pos.get_product_list();
+            const modal = new ProductListModal(); // Create an instance of the modal
+            await modal.show(products); // Show the product list in modal
+        }
+    }
 
+    CustomButton.template = 'CustomButton';
+
+    Registries.Component.add(CustomButton);
+});
